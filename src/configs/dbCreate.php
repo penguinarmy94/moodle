@@ -55,8 +55,8 @@ $dbtables[4] = "CREATE TABLE `user_credentials` (`user_id` INT UNSIGNED NOT NULL
 //user_authorization (user id, user role)
 $dbtables[5] = "CREATE TABLE `user_authorization` (`user_id` INT UNSIGNED NOT NULL, `user_role` INT NOT NULL);";
 
-//student (user id, user major)
-$dbtables[6] = "CREATE TABLE `student` (`user_id` INT UNSIGNED NOT NULL, `major_id` INT UNSIGNED NOT NULL);";
+//student (user id, user major, user major map)
+$dbtables[6] = "CREATE TABLE `student` (`user_id` INT UNSIGNED NOT NULL, `major_id` INT UNSIGNED NOT NULL, `map_id` INT UNSIGNED NOT NULL);";
 
 //courses_taken (user id, course id)
 $dbtables[7] = "CREATE TABLE `courses_taken` (`user_id` INT UNSIGNED NOT NULL, `course_id` INT UNSIGNED NOT NULL);";
@@ -84,6 +84,6 @@ foreach ($dbtables as $query) {
         die;
     }
 }
-echo "\n"
+echo "\n";
 //closes the database connection
 $db->close();
