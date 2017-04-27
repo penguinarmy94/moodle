@@ -84,6 +84,6 @@ foreach ($dbtables as $query) {
         die;
     }
 }
-echo "\n"
+echo "\n";
 //closes the database connection
 $db->close();
