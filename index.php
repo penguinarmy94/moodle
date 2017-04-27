@@ -1,6 +1,7 @@
 <?php
 
 require_once ("src/views/view.php");
+require_once("vendor/autoload.php");
 
 use moodle\views as VIEW;
 
