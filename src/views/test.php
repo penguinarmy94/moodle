@@ -8,8 +8,9 @@
 	$mysql = new MySQL();
 	$mysql -> openConnection();
 
-	$ids = retrieveMapCourses("Software Engineering");
-	$finished = retrieveStudentCourses("Kevin Dang");
+	$ids = $mysql->retrieveMapCourses("Software Engineering");
+	$finished = $mysql->retrieveStudentCoursesTaken("Kevin", "Dang");
+	
 ?>
 
 </body>

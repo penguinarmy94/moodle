@@ -30,43 +30,46 @@ class MySQL
 		return $this -> conn;
 	}
 
-	public function retrieveStudentCourses($firstname, $lastname)
+	public function retrieveStudentCoursesTaken($firstname, $lastname)
 	{
 		$returnValue = array();
-		$sql = "select course_id from courses join courses_taken using course_id where firstname='".$firstname."', lastname='".$lastname."'";
-		$result = $this -> connection -> query($sql);
+		$sql = "select course_id from courses_taken
+					where user_id = (select user_id from user where firstname='".$firstname."' and lastname='".$lastname."')";
+		$result = $this -> conn -> query($sql);
 		if($result != null)
 		{
 			for($x = 0; $x < mysqli_num_rows($result); $x++)
 			{
-				$row = $result -> fetch_array(MYSQLI_ASSOC)
-				$returnValue[$x] = $row["course_id"];
+				$row = $result -> fetch_array(MYSQLI_ASSOC);
+				$content = $row['course_id'];
+				$returnValue[] = $content;
 			}
 		}
-		echo($returnValue);
-		return $returnvalue;
+
+		//echo($returnValue);
+		return $returnValue;
 	}
 
 	public function retrieveMapCourses($major)
 	{
 		$returnValue = array();
 		$sql = "select map_id from major_map where for_major_id = (select major_id from major where major_name = '".$major."')";
-		$result = $this -> connection -> query($sql);
+		$result = $this -> conn -> query($sql);
 		if($result != null && (mysqli_num_rows($result) == 1))
 		{
 			$row = $result -> fetch_array(MYSQLI_ASSOC);
-			$sql2 = "select course_id from map_contents where map_id = '".$row["map_id"]."'";
-			$result = $this -> connection -> query($sql);
+			$sql2 = "select course_id from major_map_coontents where map_id = '".$row["map_id"]."'";
+			$result = $this -> conn -> query($sql2);
 			if($result != null)
 			{
 				for($x = 0; $x < mysqli_num_rows($result); $x++)
 				{
 					$row = $result -> fetch_array(MYSQLI_ASSOC);
-					$returnValue[$x] = $row["course_id"];
+					$returnValue[] = $row['course_id'];
 				}
 			}
 		}
-		return $returnvalue;
+		return $returnValue;
 	}
 
 	public function retrieveMapCourseNames($major)
