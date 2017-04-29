@@ -3,6 +3,7 @@ namespace moodle\views;
 
 require_once("footer.php");
 require_once("heading.php");
+require("MySQL.php");
 
 use \Fhaculty\Graph\Graph as Graph;
 
