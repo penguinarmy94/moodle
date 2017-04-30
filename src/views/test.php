@@ -9,7 +9,9 @@
 	$mysql -> openConnection();
 
 	$ids = $mysql->retrieveMapCourses("Software Engineering");
+	$courses = $mysql ->retrieveMapCourseNames("Software Engineering");
 	$finished = $mysql->retrieveStudentCoursesTaken("Kevin", "Dang");
+	$map = $mysql->generateCourseDependencies("Software Engineering");
 	
 ?>
 
