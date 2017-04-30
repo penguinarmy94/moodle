@@ -3,19 +3,19 @@ namespace moodle\views;
 
 require_once("footer.php");
 require_once("heading.php");
-require("MySQL.php");
 
 use \Fhaculty\Graph\Graph as Graph;
 
 
-class View
+class GraphView
 {
 	private $header;
 	private $footer;
 	
 	public function __construct()
 	{
-		
+		//$this->header = new Heading();
+		//$this->footer = new Footer();
 	}
 	
 	public function render()
