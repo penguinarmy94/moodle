@@ -32,7 +32,7 @@ class EditMapCourseView {
         <div class="body_block">
             <div class="header_body_block"><h2 class="header_body_title"><?=$map_name?>'s Course List</h2></div>
             <table class="course_table">
-                <tr><th class="table_header_id">Course ID</th><th class="table_header">Course Name</th><th class="table_header">Course Abbreviation</th><th class="empty_header"></th><th class="empty_header"></th></tr>
+                <tr><th class="table_header_id">Course ID</th><th class="table_header">Course Name</th><th class="table_header">Course Abbreviation</th><th class="empty_header"></th></tr>
                 <?php
                     for ($i=0; $i < sizeof($course_array); $i++) {
                         $course = $course_array[$i];
@@ -44,7 +44,6 @@ class EditMapCourseView {
                                 <td class="table_id"><?=$id?></td>
                                 <td class="table_content"><?=$course_name?></td>
                                 <td class="table_content"><?=$course_abbrev?></td>
-                                <td class="table_button"><a class="button_link" href=""><div class="button_text">Edit</div></a></td>
                                 <td class="table_button"><a class="button_link" href=""><div class="button_text">Delete</div></a></td>
                             </tr>
                         <?php
