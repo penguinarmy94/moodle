@@ -30,7 +30,7 @@ class EditMapView {
         <div class="body_block">
             <div class="header_body_block"><h2 class="header_body_title">Edit Maps</h2></div>
             <table class="map_table">
-                <tr><th class="table_header_id">Map ID</th><th class="table_header">Map Name</th><th class="table_header">Major</th><th class="empty_header"></th><th class="empty_header"></th></tr>
+                <tr><th class="table_header_id">Map ID</th><th class="table_header">Map Name</th><th class="table_header">Major</th><th class="empty_header"></th><th class="empty_header"></th><th class="empty_header"></th></tr>
                 <?php
                     for ($i=0; $i < sizeof($map_array); $i++) {
                         $map = $map_array[$i];
@@ -42,6 +42,7 @@ class EditMapView {
                                 <td class="table_id"><?=$id?></td>
                                 <td class="table_content"><?=$map_name?></td>
                                 <td class="table_content"><?=$major_name?></td>
+                                <td class="table_button"><a class="button_link" href=""><div class="button_text">View</div></a></td>
                                 <td class="table_button"><a class="button_link" href=""><div class="button_text">Edit</div></a></td>
                                 <td class="table_button"><a class="button_link" href=""><div class="button_text">Delete</div></a></td>
                             </tr>
