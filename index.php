@@ -23,15 +23,11 @@ $session_data =  [];
 //'name' ->
 
 
-<<<<<<< HEAD
+
 $number = 2;
+//if (!isset($_REQUEST['c'])) {
 if ($number == 0) {
     $session_data['user_role'] = 0;
-=======
-
-if (!isset($_REQUEST['c'])) {
-    $session_data['user_role'] = 1;
->>>>>>> 9c877e8e9b0682286d21ceb0426dfc23780baaf9
     $session_data['user_name'] = "Jorge Aguiniga";
     $session_data['user_id'] = "008214700";
     $a = new VIEW\AdminMapView($session_data);
@@ -70,21 +66,13 @@ else if (isset($_REQUEST['c']) && isset($_REQUEST['m']))
 	$class = $_REQUEST['c'];
 	if($class == "NavigationController")
 	{
-<<<<<<< HEAD
-		$method = $_REQUEST['m'];
-		if(isset($_REQUEST['arg1']))
-		{
-			$class->$method($_REQUEST['arg1']);
-		}
-=======
 		$class = 'moodle\\controllers\\'.$class;
 		$class = new $class();
 		$user['first'] = "Kevin";
 		$user['last'] = "Dang";
 		$user['major'] = "Software Engineering";
-		$method = $_REQUEST['m'];			
+		$method = $_REQUEST['m'];
 		$class->$method($user);
->>>>>>> 9c877e8e9b0682286d21ceb0426dfc23780baaf9
 	}
 }
 else
