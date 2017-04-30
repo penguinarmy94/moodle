@@ -1,4 +1,5 @@
 <?php
+namespace moodle\views\layouts;
 
 class Dashboard {
 

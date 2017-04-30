@@ -2,7 +2,7 @@
 
 namespace moodle\controllers;
 
-require_once("src/views/LoginView.php");
+require_once("src/views/GraphView.php");
 require_once("src/views/MySQL.php");
 
 use moodle\views as VIEW;
@@ -29,8 +29,11 @@ class NavigationController
 		
 		if (!empty($dataArray))
 		{
-			$this->view = new VIEW\GraphView();
-			if (isset($data['finished']))
+			$session_data['user_role'] = 1;
+			$session_data['user_name'] = "Jorge Aguiniga";
+			$session_data['user_id'] = "008214700";
+			$this->view = new VIEW\GraphView($session_data);
+			if (!isset($dataArray['finished']))
 			{
 				$dataArray['type'] = "admin";
 			}

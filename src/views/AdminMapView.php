@@ -1,4 +1,5 @@
 <?php
+namespace moodle\views;
 
 require_once ("src/views/layouts/heading.php");
 require_once ("src/views/layouts/footer.php");
@@ -6,6 +7,7 @@ require_once ("src/views/layouts/navbar.php");
 require_once ("src/views/layouts/footing.php");
 require_once ("src/views/layouts/dashboard.php");
 
+use moodle\views\layouts as LYOT;
 
 class AdminMapView {
 
@@ -18,12 +20,12 @@ class AdminMapView {
     public function render() {
         $has = ['has_script' => false, 'has_css' => true];
         $be = ['css' => 'src/styles/AdminMabView.css'];
-        $h = new Heading($has, $be);
+        $h = new LYOT\Heading($has, $be);
         $h->render();
         echo '<body>';
-        $nav = new NavBar($this->session_data['user_name']);
+        $nav = new LYOT\NavBar($this->session_data['user_name']);
         $nav->render();
-        $nav = new Dashboard($this->session_data);
+        $nav = new LYOT\Dashboard($this->session_data);
         $nav->render();
         ?>
         <div class="body_block">
@@ -39,15 +41,15 @@ class AdminMapView {
             </div>
             <br/>
             <div class="map_block">
-                <div class="map_button_block"><a class="button_link" href=""><div class="button_text">View Map</div></a></div>
+                <div class="map_button_block"><a class="button_link" href="index.php?c=NavigationController&m=mapView"><div class="button_text">View Map</div></a></div>
                 <div class="map_description_block"><p class="map_description">view a major map to the system</p></div>
             </div>
         </div>
         <?php
-        $foot = new Footing($this->session_data['user_name']);
+        $foot = new LYOT\Footing($this->session_data['user_name']);
         $foot->render();
         echo '</body>';
-        $f = new Footer();
+        $f = new LYOT\Footer();
         $f->render();
     }
 

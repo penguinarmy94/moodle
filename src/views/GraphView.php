@@ -1,66 +1,55 @@
 <?php
 namespace moodle\views;
 
-require_once("footer.php");
-require_once("heading.php");
+require_once ("src/views/layouts/heading.php");
+require_once ("src/views/layouts/footer.php");
+require_once ("src/views/layouts/navbar.php");
+require_once ("src/views/layouts/footing.php");
+require_once ("src/views/layouts/dashboard.php");
 
 use \Fhaculty\Graph\Graph as Graph;
+use moodle\views\layouts as LYOT;
 
 
 class GraphView
 {
 	private $header;
 	private $footer;
+	private $session_data;
 	
-	public function __construct()
+	public function __construct($session_data)
 	{
-		//$this->header = new Heading();
-		//$this->footer = new Footer();
+		$this->session_data = $session_data;
 	}
 	
 	public function render($data)
-	{
-		/*
-		$courses = ["cs122", "cs135", "cs157", "cs172", "cs184", "cs197", "cs155", "cs185", "cs117"];
-		$ids = [1,2,3,4, 5, 6, 7, 8, 9];
-		$finished = [1,2,3];
-		$prereqs = [[0], [1], [1], [3], [4], [5], [5], [5], [6,7,8]];
-		*/
-		
-		
+	{	
 		$courselist = json_encode($data['courses']);
 		$idlist = json_encode($data['ids']);
 		$maplist = json_encode($data['prereqs']);
-		$finishedlist = json_encode($data['finished']);
+		if($data['type'] == "admin")
+		{
+			$finishedlist = json_encode([]);
+		}
+		else
+		{
+			$finishedlist = json_encode($data['finished']);
+		}
 		
-		?>
-			<!DOCTYPE html>
-			<html>
-			<head>
-				<title>bleh</title>
-				<script type="text/javascript" src="src/resources/node_modules/vis/dist/vis.js"></script>
-				<link href="src/resources/node_modules/vis/dist/vis.css" rel="stylesheet" type="text/css" />
-				<style type="text/css">
-					#mynetwork {
-						width: 800px;
-						height: 600px;
-						border: 1px solid lightgray;
-						margin: auto;
-					}
-					#title {
-						margin: 0 auto;
-					}
-					#label {
-						width: 400px;
-						height 20px;
-						border 2px solid lightgray;
-					}
-				</style>
-			</head>
-			<body>
-			<h1 id="title">My Network</div>
-			<div id="label"></div>
-			<div id="mynetwork"></div>
+		$has = ['has_script' => true, 'has_css' => true];
+        $be = ['css' => 'src/resources/node_modules/vis/dist/vis.css', 'script' => 'src/resources/node_modules/vis/dist/vis.js'];
+        $h = new LYOT\Heading($has, $be);
+        $h->render();
+        echo '<body>';
+        $nav = new LYOT\NavBar($this->session_data['user_name']);
+        $nav->render();
+        $nav = new LYOT\Dashboard($this->session_data);
+        $nav->render();	
+			?> 
+			<h1 id="title">My Network</h1>
+			<div class="body_block">
+				<div id="mynetwork"></div>
+			</div>
 			<script type="text/javascript">
 					var courses = JSON.parse('<?= $courselist ?>');
 					var ids = JSON.parse('<?= $idlist ?>');
@@ -106,9 +95,12 @@ class GraphView
 					// initialize your network!
 					var network = new vis.Network(container, data, options);
 					
-				</script>
-			</body>
-			</html>
+			</script>
 		<?php
+		$foot = new LYOT\Footing($this->session_data['user_name']);
+        $foot->render();
+        echo '</body>';
+        $f = new LYOT\Footer();
+        $f->render();
 	}
 }
