@@ -61,7 +61,7 @@ footer.footer_bar {
     background-color: #373a3c!important;
     position: fixed;
     bottom: 0;
-    min-height: 130px;
+    min-height: 100px;
     width: 100%;
 }
 

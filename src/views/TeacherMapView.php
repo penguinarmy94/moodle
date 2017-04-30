@@ -5,7 +5,7 @@ require_once ("src/views/layouts/footer.php");
 require_once ("src/views/layouts/navbar.php");
 require_once ("src/views/layouts/footing.php");
 require_once ("src/views/layouts/dashboard.php");
-
+use moodle\views\layouts as LYOT;
 
 class TeacherMapView {
 
@@ -19,12 +19,12 @@ class TeacherMapView {
         $student_array = $this->session_data['students'];
         $has = ['has_script' => false, 'has_css' => true];
         $be = ['css' => 'src/styles/TeacherMapView.css'];
-        $h = new Heading($has, $be);
+        $h = new LYOT\Heading($has, $be);
         $h->render();
         echo '<body>';
-        $nav = new NavBar($this->session_data['user_name']);
+        $nav = new LYOT\NavBar($this->session_data['user_name']);
         $nav->render();
-        $nav = new Dashboard($this->session_data);
+        $nav = new LYOT\Dashboard($this->session_data);
         $nav->render();
         ?>
         <div class="body_block">
@@ -52,10 +52,10 @@ class TeacherMapView {
             </table>
         </div>
         <?php
-        $foot = new Footing($this->session_data['user_name']);
+        $foot = new LYOT\Footing($this->session_data['user_name']);
         $foot->render();
         echo '</body>';
-        $f = new Footer();
+        $f = new LYOT\Footer();
         $f->render();
     }
 
