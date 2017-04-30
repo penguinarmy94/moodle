@@ -28,6 +28,7 @@ class GraphView
 		$courselist = json_encode($data['courses']);
 		$idlist = json_encode($data['ids']);
 		$maplist = json_encode($data['prereqs']);
+		echo "<script>console.log('".$maplist."');</script>";
 		if($data['type'] == "admin")
 		{
 			$finishedlist = json_encode([]);

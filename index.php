@@ -24,8 +24,12 @@ $session_data =  [];
 
 
 
-$number = 2;
-//if (!isset($_REQUEST['c'])) {
+$number = 7;
+$session_data['user_role'] = 0;
+$session_data['user_name'] = "Jorge Aguiniga";
+$session_data['user_id'] = "008214700";
+
+/*
 if ($number == 0) {
     $session_data['user_role'] = 0;
     $session_data['user_name'] = "Jorge Aguiniga";
@@ -46,13 +50,14 @@ else if ($number == 2) {
     $session_data['user_role'] = 1;
     $session_data['user_name'] = "Andy Kwan";
     $session_data['user_id'] = 1;
-    $a = new EditMapView($session_data);
+    $a = new VIEW\EditMapView($session_data);
     $a->render();
 }
 else if ($number == 3) {
 
 }
-else if(isset($_POST['add']))
+*/
+if(isset($_POST['add']))
 {
 	/*
     $class = new VIEW\View();
@@ -74,10 +79,13 @@ else if (isset($_REQUEST['c']) && isset($_REQUEST['m']))
 		$method = $_REQUEST['m'];
 		$class->$method($user);
 	}
+	else if ($class == "FormController")
+	{
+		
+	}
 }
 else
 {
-	$class = new VIEW\AdminMapView();
-	$method = "render";
-	$class->$method();
+    $a = new VIEW\AdminMapView($session_data);
+    $a->render();
 }

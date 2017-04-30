@@ -25,7 +25,7 @@ class NavigationController
 		$dataArray['finished'] = $this->model->retrieveStudentCoursesTaken($user['first'], $user['last']);
 		$dataArray['ids'] = $this->model->retrieveMapCourses($user['major']);
 		$dataArray['courses'] = $this->model->retrieveMapCourseNames($user['major']);
-		$dataArray['prereqs'] = [[4, 9, 10], [8], [], [], [], []];
+		$dataArray['prereqs'] = $this->model->generateCourseDependencies($user['major']); //[[4, 9, 10], [8], [], [], [], []];
 		
 		if (!empty($dataArray))
 		{
@@ -46,7 +46,7 @@ class NavigationController
 		
 	}
 	
-	public function addView()
+	public function addView($user)
 	{
 		
 	}
