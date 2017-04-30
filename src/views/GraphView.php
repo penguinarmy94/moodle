@@ -18,17 +18,20 @@ class GraphView
 		//$this->footer = new Footer();
 	}
 	
-	public function render()
+	public function render($data)
 	{
+		/*
 		$courses = ["cs122", "cs135", "cs157", "cs172", "cs184", "cs197", "cs155", "cs185", "cs117"];
 		$ids = [1,2,3,4, 5, 6, 7, 8, 9];
 		$finished = [1,2,3];
-		$map = [[2,3], [], [4],[5], [6,7,8], [9], [9], [9], []]; 
+		$prereqs = [[0], [1], [1], [3], [4], [5], [5], [5], [6,7,8]];
+		*/
 		
-		$courselist = json_encode($courses);
-		$idlist = json_encode($ids);
-		$maplist = json_encode($map);
-		$finishedlist = json_encode($finished);
+		
+		$courselist = json_encode($data['courses']);
+		$idlist = json_encode($data['ids']);
+		$maplist = json_encode($data['prereqs']);
+		$finishedlist = json_encode($data['finished']);
 		
 		?>
 			<!DOCTYPE html>
@@ -63,23 +66,16 @@ class GraphView
 					var ids = JSON.parse('<?= $idlist ?>');
 					var map = JSON.parse('<?= $maplist ?>');
 					var finished = JSON.parse('<?= $finishedlist ?>');
-					var labelArray = [{id: -1, label: "Incomplete"}, {id: -2, label: "Complete"}];
 					var nodeArray = [];
 					var edgeArray = [];
 					
-					var labeldata = {
-						nodes: new vis.DataSet(labelArray),
-						edges: new vis.DataSet(edgeArray)
-					}
-					
-					labeldata.nodes.update([{id:-2, color:{background: "#ff5f0f"}}]);
 					
 					for(i = 0; i < courses.length; i++)
 					{
 						nodeArray.push({id: ids[i], label: courses[i]});
 						for (j = 0; j < map[i].length; j++)
 						{
-							edgeArray.push({from: ids[i], to: map[i][j]});
+							edgeArray.push({from: map[i][j], to: ids[i]});
 						}
 					}
 					
@@ -87,13 +83,12 @@ class GraphView
 					
 					for (i = 0; i < finished.length; i++)
 					{
-						nodes.update([{id:(i+1).toString(), color:{background: "#ff5f0f"}}]);
+						nodes.update([{id:finished[i].toString(), color:{background: "#ff5f0f"}}]);
 					}
 					var edges = new vis.DataSet(edgeArray);
 
 					// create a network
 					var container = document.getElementById('mynetwork');
-					var labelContainer = document.getElementById('label');
 
 					// provide the data in the vis format
 					var data = {
@@ -110,7 +105,6 @@ class GraphView
 
 					// initialize your network!
 					var network = new vis.Network(container, data, options);
-					var labels = new vis.Network(labelContainer, labeldata, options);
 					
 				</script>
 			</body>
