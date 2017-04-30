@@ -43,35 +43,35 @@ else if ($number == 1) {
 }
 else if ($number == 2) {
     $session_data['maps'] = [['map_id' => 1, 'map_name' => "SE Fall 2014", 'major_name' => "Software Engineering Fall 2014"], ['map_id' => 2, 'map_name' => "SE Fall 2016", 'major_name' => "Software Engineering Fall 2016"], ['map_id' => 3, 'map_name' => "SE Spring 2016", 'major_name' => "Software Engineering Fall 2016"], ['map_id' => 4, 'map_name' => "CMPE Fall 2016", 'major_name' => "Software Engineering Fall 2016"], ['map_id' => 5, 'map_name' => "CMPE Spring 2016", 'major_name' => "Software Engineering Fall 2016"],];
-    $session_data['user_role'] = 1;
-    $session_data['user_name'] = "Andy Kwan";
+    $session_data['user_role'] = 0;
+    $session_data['user_name'] = "Jorge Aguiniga";
     $session_data['user_id'] = 1;
     $a = new EditMapView($session_data);
     $a->render();
 }
 else if ($number == 3) {
-    $session_data['courses'] = [['course_id' => 1, 'course_name'=> "Server Side", 'course_abbrev' => "CS137"],
-    ['course_id' => 3, 'course_name'=> "Compiler Design", 'course_abbrev' => "CMPE148"],
-    ['course_id' => 6, 'course_name'=> "Software Enterprise", 'course_abbrev' => "CMPE172"],
-    ['course_id' => 9, 'course_name'=> "Intro Japanese", 'course_abbrev' => "JAP001A"],
-    ['course_id' => 10, 'course_name'=> "Senior Project I", 'course_abbrev' => "CMPE195A"],
-    ['course_id' => 11, 'course_name'=> "Senior Project II", 'course_abbrev' => "CMPE195B"],
-    ['course_id' => 14, 'course_name'=> "Anime 101", 'course_abbrev' => "JAP101"],
-    ['course_id' => 16, 'course_name'=> "Bigginner Bowling", 'course_abbrev' => "KIN27A"],
+    $session_data['courses'] = [['course_id' => 1, 'course_name'=> "Calculus I", 'course_abbrev' => "MATH030"],
+    ['course_id' => 3, 'course_name'=> "Discrete Mathematics", 'course_abbrev' => "MATH042"],
+    ['course_id' => 6, 'course_name'=> "Calculus II", 'course_abbrev' => "MATH031"],
+    ['course_id' => 9, 'course_name'=> "Calculus III", 'course_abbrev' => "MATH032"],
+    ['course_id' => 10, 'course_name'=> "Introduction to Programming", 'course_abbrev' => "CS046A"],
+    ['course_id' => 11, 'course_name'=> "Introduction to Data Structures", 'course_abbrev' => "CS046B"],
+    ['course_id' => 14, 'course_name'=> "Data Structures and Algorithms", 'course_abbrev' => "CS146"],
+    ['course_id' => 16, 'course_name'=> "Computer Organization and Architecture", 'course_abbrev' => "CMPE120"],
     ['course_id' => 17, 'course_name'=> "Object Oriented Design", 'course_abbrev' => "CS151"],
     ['course_id' => 23, 'course_name'=> "Software Engineering I", 'course_abbrev' => "CMPE131"],
-    ['course_id' => 24, 'course_name'=> "Software Engineering I", 'course_abbrev' => "CMPE133"],
-    ['course_id' => 25, 'course_name'=> "Programming in PenguinZ", 'course_abbrev' => "CS255"],
-    ['course_id' => 28, 'course_name'=> "Introduction to Java", 'course_abbrev' => "CS46A"],
-    ['course_id' => 29, 'course_name'=> "Introduction to Java II", 'course_abbrev' => "CS46B"],
-    ['course_id' => 30, 'course_name'=> "Trumpet Performance", 'course_abbrev' => "MUS022"],
+    ['course_id' => 24, 'course_name'=> "Software Engineering II", 'course_abbrev' => "CMPE133"],
+    ['course_id' => 25, 'course_name'=> "Wireless Mobile Software Engineering", 'course_abbrev' => "CMPE137"],
+    ['course_id' => 28, 'course_name'=> "Enterprise Software Platforms", 'course_abbrev' => "CMPE172"],
+    ['course_id' => 29, 'course_name'=> "Computer Networks I", 'course_abbrev' => "CMPE148"],
+    ['course_id' => 30, 'course_name'=> "Computer and Human Interaction", 'course_abbrev' => "ISE164"],
     ['course_id' => 31, 'course_name'=> "Intro Biology", 'course_abbrev' => "BIOL10"],
-    ['course_id' => 33, 'course_name'=> "Intro Engineering", 'course_abbrev' => "ENGR10"],
-    ['course_id' => 34, 'course_name'=> "Super Smash Bros 4 Beginners", 'course_abbrev' => "JAP025A"]];
+    ['course_id' => 33, 'course_name'=> "Senior Design Project I", 'course_abbrev' => "CMPE195A"],
+    ['course_id' => 34, 'course_name'=> "Senior Design Project II", 'course_abbrev' => "CMPE195B"]];
     $session_data['map_id'] = 1;
-    $session_data['map_name'] = "SE Fall 2014";
-    $session_data['user_role'] = 1;
-    $session_data['user_name'] = "Andy Kwan";
+    $session_data['map_name'] = "SE Fall 2012";
+    $session_data['user_role'] = 0;
+    $session_data['user_name'] = "Jorge Aguiniga";
     $session_data['user_id'] = 1;
     $a = new EditMapCourseView($session_data);
     $a->render();

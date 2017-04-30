@@ -28,8 +28,17 @@ h1.nav_bar {
 }
 
 button.nav_button {
-    vertical-align: top;
+    vertical-align: text-top;
     margin-left: 25px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    text-decoration: none;
+}
+
+button.nav_button:hover {
+    background-color: #ded;
+    border: 1px solid #bbb;
 }
 
 img.nav_moodle_logo {

@@ -31,13 +31,8 @@ class AdminMapView {
         <div class="body_block">
             <div class="header_body_block"><h2 class="header_body_title">Map Administration</h2></div>
             <div class="map_block">
-                <div class="map_button_block"><a class="button_link" href=""><div class="button_text">Add New Map</div></a></div>
-                <div class="map_description_block"><p class="map_description">Add a new major map to the system</p></div>
-            </div>
-            <br/>
-            <div class="map_block">
-                <div class="map_button_block"><a class="button_link" href=""><div class="button_text">Edit Map</div></a></div>
-                <div class="map_description_block"><p class="map_description">Edit an existing major map in the system</p></div>
+                <div class="map_button_block"><a class="button_link" href=""><div class="button_text">Add/Edit Map</div></a></div>
+                <div class="map_description_block"><p class="map_description">Add a new major map or edit an existing major map in the system</p></div>
             </div>
             <br/>
             <div class="map_block">
