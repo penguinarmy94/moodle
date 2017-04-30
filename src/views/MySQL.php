@@ -97,28 +97,35 @@ class MySQL
 		return $returnValue;
 	}
 
-	// public function generateCourseDependencies($major)
-	// {
-	// 	$returnValue = array();
-	// 	$sql = "select map_id from major_map where for_major_id = (select major_id from major where major_name = '".$major."')";
-	// 	$result = $this -> conn -> query($sql);
-	// 	if($result != null && (mysqli_num_rows($result) == 1))
-	// 	{
-	// 		$row = $result -> fetch_array(MYSQLI_ASSOC);
-	// 		$sql2 = "select course_name from courses where map_id = '".$row["map_id"]."'";
-	// 		$result = $this -> connection -> query($sql);
-	// 		if($result != null)
-	// 		{
-	// 			for($x = 0; $x < mysqli_num_rows($result); $x++)
-	// 			{
-	// 				$sql3 = "select course_id from "
-	// 				$row = $result -> fetch_array(MYSQLI_ASSOC);
-	// 				$returnValue[$x] = $row["course_id"];
-	// 			}
-	// 		}
-	// 	}
-	// 	return $returnvalue;
-	// }
+	public function generateCourseDependencies($major)
+	{
+		$returnValue = array();
+		$sql = "select map_id from major_map where for_major_id = (select major_id from major where major_name = '".$major."')";
+		$result = $this -> connection -> query($sql);
+		if($result != null && (mysqli_num_rows($result) == 1))
+		{
+			$row = $result -> fetch_array(MYSQLI_ASSOC);
+			$sql2 = "select course_id from major_map_contents where map_id = '".$row["map_id"]."'";
+			$result = $this -> connection -> query($sql);
+			if($result != null)
+			{
+				for($x = 0; $x < mysqli_num_rows($result); $x++)
+				{
+					$row = $result -> fetch_array(MYSQLI_ASSOC);
+					$sql3 = "select prerequisites from course_requirements where course_id = '".$row["course_id"]."'";
+					$result2 = $this -> connection -> query($sql);
+					$preq = array();
+					for($y = 0; $y < mysqli_num_rows($result2); $y++)
+					{
+						$row = $result -> fetch_array(MYSQLI_ASSOC);
+						$preq[$y] = $row["prerequisites"];
+					}
+					$returnValue[$x] = $preq;
+				}
+			}
+		}
+		return $returnvalue;
+	}
 }
 
 ?>
