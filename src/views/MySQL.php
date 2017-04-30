@@ -1,4 +1,5 @@
 <?php
+namespace moodle\models;
 
 class MySQL
 {
@@ -18,7 +19,7 @@ class MySQL
 
 	public function openConnection()
 	{
-		$this -> conn = new mysqli($this -> host, $this -> user, $this -> pass, $this -> db);
+		$this -> conn = new \mysqli($this -> host, $this -> user, $this -> pass, $this -> db);
 		if(mysqli_connect_errno())
 		{
 			echo new Exception("Could not establish connection with database");
@@ -58,7 +59,8 @@ class MySQL
 		if($result != null && (mysqli_num_rows($result) == 1))
 		{
 			$row = $result -> fetch_array(MYSQLI_ASSOC);
-			$sql2 = "select course_id from major_map_coontents where map_id = '".$row["map_id"]."'";
+			$sql2 = "select course_id from 
+						course where course_id in (select course_id from major_map_coontents where map_id = '".$row["map_id"]."')";
 			$result = $this -> conn -> query($sql2);
 			if($result != null)
 			{
@@ -76,29 +78,30 @@ class MySQL
 	{
 		$returnValue = array();
 		$sql = "select map_id from major_map where for_major_id = (select major_id from major where major_name = '".$major."')";
-		$result = $this -> connection -> query($sql);
+		$result = $this -> conn -> query($sql);
 		if($result != null && (mysqli_num_rows($result) == 1))
 		{
 			$row = $result -> fetch_array(MYSQLI_ASSOC);
-			$sql2 = "select course_name from courses where map_id = '".$row["map_id"]."'";
-			$result = $this -> connection -> query($sql);
+			$sql2 = "select course_abbrev from 
+						course where course_id in (select course_id from major_map_coontents where map_id = '".$row["map_id"]."')";
+			$result = $this -> conn -> query($sql2);
 			if($result != null)
 			{
 				for($x = 0; $x < mysqli_num_rows($result); $x++)
 				{
 					$row = $result -> fetch_array(MYSQLI_ASSOC);
-					$returnValue[$x] = $row["course_id"];
+					$returnValue[] = $row["course_abbrev"];
 				}
 			}
 		}
-		return $returnvalue;
+		return $returnValue;
 	}
 
 	// public function generateCourseDependencies($major)
 	// {
 	// 	$returnValue = array();
 	// 	$sql = "select map_id from major_map where for_major_id = (select major_id from major where major_name = '".$major."')";
-	// 	$result = $this -> connection -> query($sql);
+	// 	$result = $this -> conn -> query($sql);
 	// 	if($result != null && (mysqli_num_rows($result) == 1))
 	// 	{
 	// 		$row = $result -> fetch_array(MYSQLI_ASSOC);

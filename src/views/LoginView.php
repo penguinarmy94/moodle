@@ -33,8 +33,8 @@ class LoginView
 				<div style="float:left; width:300px; height:700px;">
 					<form method="get" action="index.php?">
 						<input type="submit" value="graph" style="margin:auto"/>
-						<input type="hidden" name="c" value="navigation" />
-						<input type="hidden" name="m" value="graph" />
+						<input type="hidden" name="c" value="NavigationController" />
+						<input type="hidden" name="m" value="mapView" />
 					</form>
 				</div>
 				<div style="float:left; width:800px; height:700px;">

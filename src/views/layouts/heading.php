@@ -1,4 +1,5 @@
 <?php
+namespace moodle\views\layouts;
 
 class Heading {
 
@@ -25,11 +26,14 @@ class Heading {
 			<title>Moodle</title>
             <link rel="icon" href="src/resources/favicon_ora.ico" />
             <link rel="stylesheet" type="text/css" href="src/styles/templete.css" />
+			<link rel="stylesheet" type="text/css" href="src/styles/network.css" />
 			<?php
-			if (empty($this->script)) {
-				?><link rel="stylesheet" type="text/css" href="<?= $this->css; ?>" /><?php
+			if (!empty($this->css)) {
+				?>
+				<link rel="stylesheet" type="text/css" href="<?= $this->css; ?>" />
+				<?php
 			}
-			if (empty($this->css)) {
+			if (!empty($this->script)) {
 				?><script type="text/javascript" src="<?= $this->script; ?>"></script><?php
 			}
 			?>

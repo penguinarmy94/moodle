@@ -7,9 +7,9 @@ require_once ("src/views/TeacherMapView.php");
 require_once ("src/views/EditMapView.php");
 //require_once("vendor/autoload.php");
 
-require_once ("src/views/GraphView.php");
-require_once ("src/views/LoginView.php");
-require_once ("src/views/MySQL.php");
+require_once ("src/views/AdminMapView.php");
+//require_once ("src/views/LoginView.php");
+require_once ("src/controllers/navigationcontroller.php");
 
 use moodle\views as VIEW;
 
@@ -23,12 +23,18 @@ $session_data =  [];
 //'name' ->
 
 
+<<<<<<< HEAD
 $number = 2;
 if ($number == 0) {
     $session_data['user_role'] = 0;
+=======
+
+if (!isset($_REQUEST['c'])) {
+    $session_data['user_role'] = 1;
+>>>>>>> 9c877e8e9b0682286d21ceb0426dfc23780baaf9
     $session_data['user_name'] = "Jorge Aguiniga";
     $session_data['user_id'] = "008214700";
-    $a = new AdminMapView($session_data);
+    $a = new VIEW\AdminMapView($session_data);
     $a->render();
 }
 else if ($number == 1) {
@@ -52,27 +58,38 @@ else if ($number == 3) {
 }
 else if(isset($_POST['add']))
 {
+	/*
     $class = new VIEW\View();
     $method = "render";
     $class->$method();
     echo "<div>".$_POST['add']."</div>";
+	*/
 }
 else if (isset($_REQUEST['c']) && isset($_REQUEST['m']))
 {
 	$class = $_REQUEST['c'];
-	if($class = "NavigationController")
+	if($class == "NavigationController")
 	{
+<<<<<<< HEAD
 		$method = $_REQUEST['m'];
 		if(isset($_REQUEST['arg1']))
 		{
 			$class->$method($_REQUEST['arg1']);
 		}
+=======
+		$class = 'moodle\\controllers\\'.$class;
+		$class = new $class();
+		$user['first'] = "Kevin";
+		$user['last'] = "Dang";
+		$user['major'] = "Software Engineering";
+		$method = $_REQUEST['m'];			
+		$class->$method($user);
+>>>>>>> 9c877e8e9b0682286d21ceb0426dfc23780baaf9
 	}
 }
 else
 {
-	$class = new VIEW\GraphView();
+	$class = new VIEW\AdminMapView();
 	$method = "render";
 	$class->$method();
-
 }
