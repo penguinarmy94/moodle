@@ -55,7 +55,7 @@ $dbtables[4] = "CREATE TABLE `user_credentials` (`user_id` INT UNSIGNED NOT NULL
 //user_authorization (user id, user role)
 $dbtables[5] = "CREATE TABLE `user_authorization` (`user_id` INT UNSIGNED NOT NULL, `user_role` INT NOT NULL);";
 
-//student (user id, user major, user major map)
+//student (user id, user major, user major maps)
 $dbtables[6] = "CREATE TABLE `student` (`user_id` INT UNSIGNED NOT NULL, `major_id` INT UNSIGNED NOT NULL, `map_id` INT UNSIGNED NOT NULL);";
 
 //courses_taken (user id, course id)

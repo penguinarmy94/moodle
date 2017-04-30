@@ -2,19 +2,19 @@
 
 namespace moodle\views;
 
-require_once("footer.php");
-require_once("heading.php");
+require_once("src/views/layouts/footer.php");
+require_once("src/views/layouts/heading.php");
 
 class LoginView
 {
 	private $header;
 	private $footer;
-	
+
 	public function __construct()
 	{
-		
+
 	}
-	
+
 	public function render()
 	{
 		?>
@@ -33,8 +33,8 @@ class LoginView
 				<div style="float:left; width:300px; height:700px;">
 					<form method="get" action="index.php?">
 						<input type="submit" value="graph" style="margin:auto"/>
-						<input type="hidden" name="c" value="navigation" />
-						<input type="hidden" name="m" value="graph" />
+						<input type="hidden" name="c" value="NavigationController" />
+						<input type="hidden" name="m" value="mapView" />
 					</form>
 				</div>
 				<div style="float:left; width:800px; height:700px;">

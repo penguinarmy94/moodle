@@ -1,0 +1,44 @@
+a.button_link {
+    display: inline-block;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: rgba(255, 255, 255, 0.6);;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    width: 40px;
+    float: right;
+}
+a.button_link:hover {
+    background-color: #efe;
+}
+
+div.button_text {
+    color: #555;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th.table_heaer, td.table_content {
+    border-bottom: 1px solid #000;
+    width: 150px;
+    text-align: center;
+}
+
+th.table_header_id, td.table_id {
+    border-bottom: 1px solid #000;
+    width: 75px;
+    text-align: center;
+}
+
+td.view_button, th.view_header {
+    border-bottom: 1px solid #000;
+    width: 50px!important;
+    text-align: center;
+}
+
+div.map_text {
+    float: left;
+}

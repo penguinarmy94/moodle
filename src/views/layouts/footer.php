@@ -1,12 +1,11 @@
 <?php
-namespace moodle\views;
+namespace moodle\views\layouts;
 
 class Footer
 {
 	public function render()
 	{
 		?>
-			</body>
 			</html>
 		<?php
 	}
