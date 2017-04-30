@@ -1,8 +1,8 @@
 <?php
 namespace moodle\views;
 
-require_once("footer.php");
-require_once("heading.php");
+require_once("src/views/layouts/footer.php");
+require_once("src/views/layouts/heading.php");
 
 use \Fhaculty\Graph\Graph as Graph;
 
@@ -11,25 +11,25 @@ class GraphView
 {
 	private $header;
 	private $footer;
-	
+
 	public function __construct()
 	{
 		//$this->header = new Heading();
 		//$this->footer = new Footer();
 	}
-	
+
 	public function render()
 	{
 		$courses = ["cs122", "cs135", "cs157", "cs172", "cs184", "cs197", "cs155", "cs185", "cs117"];
 		$ids = [1,2,3,4, 5, 6, 7, 8, 9];
 		$finished = [1,2,3];
-		$map = [[2,3], [], [4],[5], [6,7,8], [9], [9], [9], []]; 
-		
+		$map = [[2,3], [], [4],[5], [6,7,8], [9], [9], [9], []];
+
 		$courselist = json_encode($courses);
 		$idlist = json_encode($ids);
 		$maplist = json_encode($map);
 		$finishedlist = json_encode($finished);
-		
+
 		?>
 			<!DOCTYPE html>
 			<html>
@@ -66,14 +66,14 @@ class GraphView
 					var labelArray = [{id: -1, label: "Incomplete"}, {id: -2, label: "Complete"}];
 					var nodeArray = [];
 					var edgeArray = [];
-					
+
 					var labeldata = {
 						nodes: new vis.DataSet(labelArray),
 						edges: new vis.DataSet(edgeArray)
 					}
-					
+
 					labeldata.nodes.update([{id:-2, color:{background: "#ff5f0f"}}]);
-					
+
 					for(i = 0; i < courses.length; i++)
 					{
 						nodeArray.push({id: ids[i], label: courses[i]});
@@ -82,9 +82,9 @@ class GraphView
 							edgeArray.push({from: ids[i], to: map[i][j]});
 						}
 					}
-					
+
 					var nodes = new vis.DataSet(nodeArray);
-					
+
 					for (i = 0; i < finished.length; i++)
 					{
 						nodes.update([{id:(i+1).toString(), color:{background: "#ff5f0f"}}]);
@@ -100,18 +100,18 @@ class GraphView
 						nodes: nodes,
 						edges: edges
 					};
-					
+
 					var options = {
 									edges:{
 											arrows: 'to'
 									}
-											 
+
 								  };
 
 					// initialize your network!
 					var network = new vis.Network(container, data, options);
 					var labels = new vis.Network(labelContainer, labeldata, options);
-					
+
 				</script>
 			</body>
 			</html>

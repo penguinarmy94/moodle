@@ -16,6 +16,7 @@ class TeacherMapView {
     }
 
     public function render() {
+        $student_array = $this->session_data['students'];
         $has = ['has_script' => false, 'has_css' => true];
         $be = ['css' => 'src/styles/TeacherMapView.css'];
         $h = new Heading($has, $be);
@@ -27,21 +28,28 @@ class TeacherMapView {
         $nav->render();
         ?>
         <div class="body_block">
-            <div class="header_body_block"><h2 class="header_body_title">Map</h2></div>
-            <div class="map_block">
-                <div class="map_button_block"><a class="button_link" href=""><div class="button_text">Add New Map</div></a></div>
-                <div class="map_description_block"><p class="map_description">Add a new major map to the system</p></div>
-            </div>
-            <br/>
-            <div class="map_block">
-                <div class="map_button_block"><a class="button_link" href=""><div class="button_text">Edit Map</div></a></div>
-                <div class="map_description_block"><p class="map_description">Edit an existing major map in the system</p></div>
-            </div>
-            <br/>
-            <div class="map_block">
-                <div class="map_button_block"><a class="button_link" href=""><div class="button_text">View Map</div></a></div>
-                <div class="map_description_block"><p class="map_description">view a major map to the system</p></div>
-            </div>
+            <div class="header_body_block"><h2 class="header_body_title">Student Maps</h2></div>
+            <table>
+                <tr><th class="table_header_id">SJSU ID</th><th class="table_heaer">Studnet Name</th><th class="table_heaer">Map</th><th class="view_header"></th></tr>
+                <?php
+                    for ($i=0; $i < sizeof($student_array); $i++) {
+                        $student = $student_array[$i];
+                        $id = $student['user_id'];
+                        $name = $student['first_name']." ".$student['last_name'];
+                        $map = $student['map_name'];
+                        ?>
+                            <tr>
+                                <td class="table_id"><?=$id?></td>
+                                <td class="table_content"><?=$name?></td>
+                                <td class="table_content"><?=$map?></td>
+                                <td class="view_button"><a class="button_link" href=""><div class="button_text">View</div></a></td>
+                            </tr>
+                        <?php
+                    }
+
+                ?>
+
+            </table>
         </div>
         <?php
         $foot = new Footing($this->session_data['user_name']);

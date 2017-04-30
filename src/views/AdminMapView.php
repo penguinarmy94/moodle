@@ -27,7 +27,7 @@ class AdminMapView {
         $nav->render();
         ?>
         <div class="body_block">
-            <div class="header_body_block"><h2 class="header_body_title">Map</h2></div>
+            <div class="header_body_block"><h2 class="header_body_title">Map Administration</h2></div>
             <div class="map_block">
                 <div class="map_button_block"><a class="button_link" href=""><div class="button_text">Add New Map</div></a></div>
                 <div class="map_description_block"><p class="map_description">Add a new major map to the system</p></div>

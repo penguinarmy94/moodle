@@ -2,19 +2,19 @@
 
 namespace moodle\views;
 
-require_once("footer.php");
-require_once("heading.php");
+require_once("src/views/layouts/footer.php");
+require_once("src/views/layouts/heading.php");
 
 class LoginView
 {
 	private $header;
 	private $footer;
-	
+
 	public function __construct()
 	{
-		
+
 	}
-	
+
 	public function render()
 	{
 		?>

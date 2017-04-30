@@ -9,6 +9,7 @@ a.button_link {
     width: 40px;
     float: right;
 }
+
 a.button_link:hover {
     background-color: #efe;
 }
@@ -17,11 +18,13 @@ div.button_text {
     color: #555;
 }
 
-table {
+table.map_table {
+    display: inline-block;
     border-collapse: collapse;
+    float: left;
 }
 
-th.table_heaer, td.table_content {
+th.table_header, td.table_content {
     border-bottom: 1px solid #000;
     width: 150px;
     text-align: center;
@@ -33,7 +36,7 @@ th.table_header_id, td.table_id {
     text-align: center;
 }
 
-td.view_button, th.view_header {
+td.table_button, th.empty_header {
     border-bottom: 1px solid #000;
     width: 50px!important;
     text-align: center;
@@ -41,4 +44,34 @@ td.view_button, th.view_header {
 
 div.map_text {
     float: left;
+}
+
+
+div.new_map_form_block {
+    display: inline-block;
+    float: left;
+    margin-left: 100px;
+}
+
+input.save {
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: rgba(255, 255, 255, 0.6);;
+    border: 1px solid #969698;
+    text-decoration: none;
+    width: 100%;
+}
+input.save:hover {
+
+    background-color: #efe;
+}
+
+input.map_text {
+    margin-bottom: 28px;
+}
+
+label.map_label {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
 }
