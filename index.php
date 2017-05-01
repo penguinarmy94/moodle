@@ -24,7 +24,7 @@ $session_data =  [];
 
 
 
-$number = 3;
+$number = 2;
 //if (!isset($_REQUEST['c'])) {
 if ($number == 0) {
     $session_data['user_role'] = 0;
@@ -42,7 +42,7 @@ else if ($number == 1) {
     $a->render();
 }
 else if ($number == 2) {
-    $session_data['maps'] = [['map_id' => 1, 'map_name' => "SE Fall 2014", 'major_name' => "Software Engineering Fall 2014"], ['map_id' => 2, 'map_name' => "SE Fall 2016", 'major_name' => "Software Engineering Fall 2016"], ['map_id' => 3, 'map_name' => "SE Spring 2016", 'major_name' => "Software Engineering Fall 2016"], ['map_id' => 4, 'map_name' => "CMPE Fall 2016", 'major_name' => "Software Engineering Fall 2016"], ['map_id' => 5, 'map_name' => "CMPE Spring 2016", 'major_name' => "Software Engineering Fall 2016"],];
+    $session_data['maps'] = [['map_id' => 1, 'map_name' => "SE Fall 2014", 'major_name' => "Software Engineering Fall 2014"], ['map_id' => 2, 'map_name' => "SE Fall 2016", 'major_name' => "Software Engineering Fall 2016"], ['map_id' => 3, 'map_name' => "SE Spring 2016", 'major_name' => "Software Engineering Spring 2016"], ['map_id' => 4, 'map_name' => "CMPE Fall 2016", 'major_name' => "Computer Engineering Fall 2016"], ['map_id' => 5, 'map_name' => "CMPE Spring 2016", 'major_name' => "Computer Spring Fall 2016"],];
     $session_data['user_role'] = 0;
     $session_data['user_name'] = "Jorge Aguiniga";
     $session_data['user_id'] = 1;
