@@ -3,7 +3,7 @@
 namespace moodle\controllers;
 
 require_once("src/views/GraphView.php");
-require_once("src/views/MySQL.php");
+require_once("src/models/MySQL.php");
 
 use moodle\views as VIEW;
 use moodle\models as MODEL;
@@ -22,17 +22,18 @@ class NavigationController
 	
 	public function mapView($user)
 	{
-		$dataArray['finished'] = $this->model->retrieveStudentCoursesTaken($user['first'], $user['last']);
+		if(isset($user['first']) && isset($user['last']))
+		{
+			$dataArray['finished'] = $this->model->retrieveStudentCoursesTaken($user['first'], $user['last']);
+		}
+		
 		$dataArray['ids'] = $this->model->retrieveMapCourses($user['major']);
 		$dataArray['courses'] = $this->model->retrieveMapCourseNames($user['major']);
 		$dataArray['prereqs'] = $this->model->generateCourseDependencies($user['major']); //[[4, 9, 10], [8], [], [], [], []];
 		
-		if (!empty($dataArray))
+		if (!empty($dataArray['ids']) && !empty($dataArray['courses']) && !empty($dataArray['prereqs']))
 		{
-			$session_data['user_role'] = 1;
-			$session_data['user_name'] = "Jorge Aguiniga";
-			$session_data['user_id'] = "008214700";
-			$this->view = new VIEW\GraphView($session_data);
+			$this->view = new VIEW\GraphView($user);
 			if (!isset($dataArray['finished']))
 			{
 				$dataArray['type'] = "admin";
@@ -43,15 +44,25 @@ class NavigationController
 			}
 			$this->view->render($dataArray);
 		}
+		else
+		{
+			header("Location: index.php");
+		}
 		
 	}
 	
-	public function addView($user)
+	public function adminDashboard($user)
 	{
-		
+		$
 	}
 	
-	public function editView()
+	public function teacherDashboard($user)
+	{
+		$session_data['students'] = $this->model->getStudents($user);
+		$this->view = new VIEW\TeacherMapView($session_data);
+	}
+	
+	public function editMap($user)
 	{
 		
 	}

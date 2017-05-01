@@ -126,6 +126,43 @@ class MySQL
 		}
 		return $returnValue;
 	}
+	
+	public function getStudents($user)
+	{
+		$returnValue = array();
+		
+		$sql = "select user_id from courses_taking where course_id = (select course_id from courses_teaching where user_id = '".$user['user_id']."')";
+		$result = $this -> conn -> query($sql);
+		if($result != null && (mysqli_num_rows($result) > 0))
+		{
+			for ($x = 0; $x < mysqli_num_rows($result); $x++)
+			{
+				$row = $result->fetch_array(MYSQLI_ASSOC);
+				$sql2 = "select ";
+			}
+			$row = $result -> fetch_array(MYSQLI_ASSOC);
+			$sql2 = "select course_id from major_map_coontents where map_id = '".$row["map_id"]."'";
+			$result = $this -> conn -> query($sql2);
+			if($result != null)
+			{
+				for($x = 0; $x < mysqli_num_rows($result); $x++)
+				{
+					$row = $result -> fetch_array(MYSQLI_ASSOC);
+					$sql3 = "select prerequisite from course_requirements where course_id = '".$row["course_id"]."'";
+					$result2 = $this -> conn -> query($sql3);
+					$preq = array();
+					for($y = 0; $y < mysqli_num_rows($result2); $y++)
+					{
+						$row = $result2 -> fetch_array(MYSQLI_ASSOC);
+						$preq[] = $row["prerequisite"];
+					}
+					$returnValue[] = $preq;
+				}
+			}
+		}
+		
+		
+	}
 }
 
 ?>
