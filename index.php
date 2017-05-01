@@ -24,18 +24,18 @@ $session_data['last'] = "Aguiniga";
 $session_data['user_role'] = 0;
 $session_data['major'] = "Software Engineering Fall 2012";
 $session_data['user_name'] = "Jorge Aguiniga";
-$session_data['user_id'] = 1;	
+$session_data['user_id'] = 1;
 */
 
-/*
-//A student 
+
+//A student
 $session_data['first'] = "Luis";
 $session_data['last'] = "Otero";
 $session_data['user_role'] = 2;
 $session_data['major'] = "Software Engineering Fall 2012";
 $session_data['user_name'] = "Luis Otero";
 $session_data['user_id'] = 2;
-*/
+
 
 
 /*
@@ -94,7 +94,7 @@ else if (!isset($_REQUEST['c']) && !isset($_REQUEST['m']))
 	}
 	else
 	{
-		
+
 	}
 }
 else if (isset($_REQUEST['c']) && isset($_REQUEST['m']))
