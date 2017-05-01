@@ -53,7 +53,7 @@ class NavigationController
 	
 	public function adminDashboard($user)
 	{
-		$
+		
 	}
 	
 	public function teacherDashboard($user)

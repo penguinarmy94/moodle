@@ -22,11 +22,11 @@ $session_data =  [];
 //'user_role' -> id of user
 //'name' ->
 
-$session_data['first'] = "Kevin";
-$session_data['last'] = "Dang";
+$session_data['first'] = "Luis";
+$session_data['last'] = "Otero";
 $session_data['user_role'] = 2;
-$session_data['major'] = "Software Engineering";
-$session_data['user_name'] = "Kevin Dang";
+$session_data['major'] = "Software Engineering Fall 2012";
+$session_data['user_name'] = "Luis Otero";
 $session_data['user_id'] = 1;	
 
 if (!isset($_REQUEST['c']) && !isset($_REQUEST['m']))
@@ -52,35 +52,6 @@ if (!isset($_REQUEST['c']) && !isset($_REQUEST['m']))
 		
 	}
 }
-/*
-else if (isset($_REQUEST['m']) && isset($_REQUEST['arg1']) && $session_data['user_role'] == 0) {
-    $session_data['courses'] = [['course_id' => 1, 'course_name'=> "Server Side", 'course_abbrev' => "CS137"],
-    ['course_id' => 3, 'course_name'=> "Compiler Design", 'course_abbrev' => "CMPE148"],
-    ['course_id' => 6, 'course_name'=> "Software Enterprise", 'course_abbrev' => "CMPE172"],
-    ['course_id' => 9, 'course_name'=> "Intro Japanese", 'course_abbrev' => "JAP001A"],
-    ['course_id' => 10, 'course_name'=> "Senior Project I", 'course_abbrev' => "CMPE195A"],
-    ['course_id' => 11, 'course_name'=> "Senior Project II", 'course_abbrev' => "CMPE195B"],
-    ['course_id' => 14, 'course_name'=> "Anime 101", 'course_abbrev' => "JAP101"],
-    ['course_id' => 16, 'course_name'=> "Beginner Bowling", 'course_abbrev' => "KIN27A"],
-    ['course_id' => 17, 'course_name'=> "Object Oriented Design", 'course_abbrev' => "CS151"],
-    ['course_id' => 23, 'course_name'=> "Software Engineering I", 'course_abbrev' => "CMPE131"],
-    ['course_id' => 24, 'course_name'=> "Software Engineering I", 'course_abbrev' => "CMPE133"],
-    ['course_id' => 25, 'course_name'=> "Programming in PenguinZ", 'course_abbrev' => "CS255"],
-    ['course_id' => 28, 'course_name'=> "Introduction to Java", 'course_abbrev' => "CS46A"],
-    ['course_id' => 29, 'course_name'=> "Introduction to Java II", 'course_abbrev' => "CS46B"],
-    ['course_id' => 30, 'course_name'=> "Trumpet Performance", 'course_abbrev' => "MUS022"],
-    ['course_id' => 31, 'course_name'=> "Intro Biology", 'course_abbrev' => "BIOL10"],
-    ['course_id' => 33, 'course_name'=> "Intro Engineering", 'course_abbrev' => "ENGR10"],
-    ['course_id' => 34, 'course_name'=> "Super Smash Bros 4 Beginners", 'course_abbrev' => "JAP025A"]];
-    $session_data['map_id'] = 1;
-    $session_data['map_name'] = "SE Fall 2014";
-    $session_data['user_role'] = 1;
-    $session_data['user_name'] = "Andy Kwan";
-    $session_data['user_id'] = 1;
-    $a = new VIEW\EditMapCourseView($session_data);
-    $a->render();
-}
-*/
 else if (isset($_REQUEST['c']) && isset($_REQUEST['m']))
 {
 	$class = $_REQUEST['c'];
