@@ -38,7 +38,7 @@ class TeacherMapView {
                         $student = $student_array[$i];
                         $id = $student['user_id'];
                         $name = $student['first_name']." ".$student['last_name'];
-                        $major = $student['map_name'];
+                        $major = $student['major'];
                         ?>
                             <tr>
                                 <td class="table_id"><?=$id?></td>

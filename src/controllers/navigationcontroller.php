@@ -3,6 +3,9 @@
 namespace moodle\controllers;
 
 require_once("src/views/GraphView.php");
+require_once("src/views/AdminMapView.php");
+require_once("src/views/EditMapCourseView.php");
+require_once("src/views/TeacherMapView.php");
 require_once("src/models/MySQL.php");
 
 use moodle\views as VIEW;
@@ -53,17 +56,40 @@ class NavigationController
 	
 	public function adminDashboard($user)
 	{
-		
+		$user['maps'] = $this->model->getMapItems();
+		if($user['maps'] != null)
+		{
+			$this->view = new VIEW\AdminMapView($user);
+			$this->view->render();
+		}
+		else
+		{
+			header("Location: index.php");
+		}
 	}
 	
 	public function teacherDashboard($user)
 	{
-		$session_data['students'] = $this->model->getStudents($user);
-		$this->view = new VIEW\TeacherMapView($session_data);
+		$user['students'] = $this->model->getStudents($user);
+		if($user['students'] != null)
+		{
+			$this->view = new VIEW\TeacherMapView($user);
+			$this->view->render();
+		}
 	}
 	
-	public function editMap($user)
+	public function editView($user)
 	{
-		
+		$user['courses'] = $this->model->getMapCourses($user['map_id']);
+		if($user['courses'] != null)
+		{
+			$this->view = new VIEW\EditMapCourseView($user);
+			$this->view->render();
+		}
+		else
+		{
+			$this->view = new VIEW\EditMapCourseView($user);
+			$this->view->render();
+		}
 	}
 }

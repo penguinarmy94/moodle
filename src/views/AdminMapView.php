@@ -46,8 +46,8 @@ class AdminMapView {
                                 <td class="table_content"><?=$map_name?></td>
                                 <td class="table_content"><?=$major_name?></td>
                                 <td class="table_button"><a class="button_link" href="index.php?c=NavigationController&m=mapView&arg1=<?= $major_name ?>"><div class="button_text">View</div></a></td>
-                                <td class="table_button"><a class="button_link" href="index.php?c=NavigationController&m=editView&arg1=<?= $major_name ?>"><div class="button_text">Edit</div></a></td>
-                                <td class="table_button"><a class="button_link" href="index.php?c=FormController&m=deleteMap&arg1=<?= $map_id ?>"><div class="button_text">Delete</div></a></td>
+                                <td class="table_button"><a class="button_link" href="index.php?c=NavigationController&m=editView&arg1=<?= $major_name ?>&arg2=<?= $id ?>"><div class="button_text">Edit</div></a></td>
+                                <td class="table_button"><a class="button_link" href="index.php?c=FormController&m=deleteMap&arg1=<?= $id ?>"><div class="button_text">Delete</div></a></td>
                             </tr>
                         <?php
                     }
@@ -65,6 +65,8 @@ class AdminMapView {
                     <input class="map_text" type="text" name="map_major" id="map_major">
                     <br>
                     <input class="save" type="submit" name="add" value="Add new map" />
+					<input type="hidden" name="c" value="FormController" />
+					<input type="hidden" name="m" value="addMap" />
                 </form>
             </div>
         </div>

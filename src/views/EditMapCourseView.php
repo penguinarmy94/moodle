@@ -1,4 +1,5 @@
 <?php
+namespace moodle\views;
 
 require_once ("src/views/layouts/heading.php");
 require_once ("src/views/layouts/footer.php");
@@ -16,8 +17,12 @@ class EditMapCourseView {
     }
 
     public function render() {
-        $course_array = $this->session_data['courses'];
-        $map_name = $this->session_data['map_name'];
+		$course_array = array();
+		if(isset($this->session_data['courses']))
+		{
+			$course_array = $this->session_data['courses'];
+		}
+        $map_name = $this->session_data['major'];
         $map_id = $this->session_data['map_id'];
         $has = ['has_script' => false, 'has_css' => true];
         $be = ['css' => 'src/styles/EditMapCourseView.css'];
@@ -44,7 +49,7 @@ class EditMapCourseView {
                                 <td class="table_id"><?=$id?></td>
                                 <td class="table_content"><?=$course_name?></td>
                                 <td class="table_content"><?=$course_abbrev?></td>
-                                <td class="table_button"><a class="button_link" href=""><div class="button_text">Delete</div></a></td>
+                                <td class="table_button"><a class="button_link" href="index.php?c=FormController&m=deleteCourseFromMap&arg1=<?= $id ?>&arg2=<?= $map_id ?>"><div class="button_text">Delete</div></a></td>
                             </tr>
                         <?php
                     }
@@ -56,9 +61,12 @@ class EditMapCourseView {
                 <h3>Add New Course</h3>
                 <form class="new_course_form" method="POST" action="index.php">
                     <label class="course_label" for="course_name">Course ID:</label>
-                    <input class="course_text" type="text" name="course_name" id="course_name">
+                    <input class="course_text" type="text" name="course_id" id="course_id">
                     <br>
                     <input class="save" type="submit" name="add" value="Add new course" />
+					<input type="hidden" name="c" value="FormController" />
+					<input type="hidden" name="m" value="addCourseToMap" />
+					<input type="hidden" name="map_id" value="<?= $map_id ?>" />
                 </form>
             </div>
         </div>

@@ -127,41 +127,134 @@ class MySQL
 		return $returnValue;
 	}
 	
-	public function getStudents($user)
+	public function getMapItems()
+	{
+		$returnValue = array();
+		$sql = "select map_id, map_name, major_name from major_map join major on for_major_id = major_id";
+		$result = $this->conn->query($sql);
+		if($result != null)
+		{
+			for($x = 0; $x < mysqli_num_rows($result); $x++)
+			{
+				$row = $result->fetch_array(MYSQLI_ASSOC);
+				$returnValue[] = ["map_id" => $row['map_id'], "map_name" => $row['map_name'], "major_name" => $row['major_name']];
+			}
+		}
+		
+		return $returnValue;
+	}
+	
+	public function getMapCourses($map_id)
 	{
 		$returnValue = array();
 		
-		$sql = "select user_id from courses_taking where course_id = (select course_id from courses_teaching where user_id = '".$user['user_id']."')";
-		$result = $this -> conn -> query($sql);
-		if($result != null && (mysqli_num_rows($result) > 0))
+		$sql = "select course_id, course_name, course_abbrev from course where course_id in (select course_id from major_map_coontents where map_id = ".$map_id.");";
+		$result = $this->conn->query($sql);
+		if($result != null)
 		{
 			for ($x = 0; $x < mysqli_num_rows($result); $x++)
 			{
 				$row = $result->fetch_array(MYSQLI_ASSOC);
-				$sql2 = "select ";
-			}
-			$row = $result -> fetch_array(MYSQLI_ASSOC);
-			$sql2 = "select course_id from major_map_coontents where map_id = '".$row["map_id"]."'";
-			$result = $this -> conn -> query($sql2);
-			if($result != null)
-			{
-				for($x = 0; $x < mysqli_num_rows($result); $x++)
-				{
-					$row = $result -> fetch_array(MYSQLI_ASSOC);
-					$sql3 = "select prerequisite from course_requirements where course_id = '".$row["course_id"]."'";
-					$result2 = $this -> conn -> query($sql3);
-					$preq = array();
-					for($y = 0; $y < mysqli_num_rows($result2); $y++)
-					{
-						$row = $result2 -> fetch_array(MYSQLI_ASSOC);
-						$preq[] = $row["prerequisite"];
-					}
-					$returnValue[] = $preq;
-				}
+				$returnValue[] = ["course_id" => $row['course_id'], "course_name" => $row['course_name'], "course_abbrev" => $row['course_abbrev']];
 			}
 		}
 		
+		return $returnValue;
+	}
+	
+	public function getStudents($user)
+	{
+		$returnValue = array();
 		
+		$sql = "select user_id from courses_taking where course_id in (select course_id from courses_teaching where user_id = '".$user['user_id']."')";
+		$result = $this -> conn -> query($sql);
+		if($result != null && (mysqli_num_rows($result) > 0))
+		{
+			$user = array();
+			for ($x = 0; $x < mysqli_num_rows($result); $x++)
+			{
+				$row = $result->fetch_array(MYSQLI_ASSOC);
+				$sql2 = "select major_name from student join major on student.major_id = major.major_id where user_id = ".$row['user_id'].";";
+				$sql3 = "select firstname, lastname from user where user_id = ".$row['user_id'].";";
+				$result2 = $this->conn->query($sql2);
+				if(mysqli_num_rows($result2) == 1)
+				{
+					$result3 = $this->conn->query($sql3);
+					if(mysqli_num_rows($result3) == 1)
+					{
+						$row2 = $result2->fetch_array(MYSQLI_ASSOC);
+						$row3 = $result3->fetch_array(MYSQLI_ASSOC);
+						$returnValue[]= ["user_id" => $row['user_id'], "first_name" => $row3['firstname'], "last_name" => $row3['lastname'], "major" => $row2['major_name']];
+					}
+					else
+					{
+						break;
+					}
+				}
+				else
+				{
+					break;
+				}
+			}
+			
+		}
+		
+		return $returnValue;
+	}
+	
+	public function addNewMap ($mapName, $majorID)
+	{
+		$sql = "select major_id from major where major_id = ". $majorID.";";
+		$result = $this->conn->query($sql);
+		if($result != null)
+		{
+			$sql2 = "select major_id from major_map_coontents where for_major_id = ".$majorID.";";
+			$result = $this->conn->query($sql2);
+			if($result == null)
+			{
+				$sql3 = "insert into major_map (map_name, for_major_id) values ('".$mapName."','".$majorID."');";
+				$this->conn->query($sql3);
+				return true;
+			}
+			else
+			{
+				echo"<script>console.log('Found Duplicate');</script>";
+			}
+		}
+		else
+		{
+			echo"<script>console.log('Could Not Find Major');</script>";
+		}
+		
+		return false;
+	}
+	
+	public function addNewCourse($id, $mapID)
+	{
+		$sql = "select course_id from course where course_id = ".$id.";";
+		$result = $this->conn->query($sql);
+		if($result != null)
+		{
+			$sql2 = "insert into major_map_coontents values ('".$mapID."','".$id."');";
+			$this->conn->query($sql2);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public function deleteMap($mapID)
+	{
+		$sql = "delete from major_map_coontents where map_id = ".$mapID.";";
+		$sql2 = "delete from major_map where map_id = ".$mapID.";";
+		$this->conn->query($sql);
+		$this->conn->query($sql2);
+	}
+	
+	public function deleteCourse($courseID, $mapID)
+	{
+		$sql = "delete from major_map_coontents where course_id = ".$courseID." and map_id = ".$mapID.";";
+		$this->conn->query($sql);
 	}
 }
 

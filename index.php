@@ -10,26 +10,71 @@ require_once ("src/views/EditMapCourseView.php");
 require_once ("src/views/AdminMapView.php");
 //require_once ("src/views/LoginView.php");
 require_once ("src/controllers/navigationcontroller.php");
+require_once ("src/controllers/formcontroller.php");
 
 use moodle\views as VIEW;
+use moodle\controllers as CTR;
 
 $session_data =  [];
-//'courses' -> an array fo course abbrev.
-//'ids' -> an array of course id corresponding to abbrev
-//'finished' -> ids that correspond to what courses the user has finished
-//'map' -> matrix of the next courses they can take
-//'role' -> user role (0= admin, 1= teacher, 2= student)
-//'user_role' -> id of user
-//'name' ->
 
+/*
+//An administrator
+$session_data['first'] = "Jorge";
+$session_data['last'] = "Aguiniga";
+$session_data['user_role'] = 0;
+$session_data['major'] = "Software Engineering Fall 2012";
+$session_data['user_name'] = "Jorge Aguiniga";
+$session_data['user_id'] = 1;	
+*/
+
+/*
+//A student 
 $session_data['first'] = "Luis";
 $session_data['last'] = "Otero";
 $session_data['user_role'] = 2;
 $session_data['major'] = "Software Engineering Fall 2012";
 $session_data['user_name'] = "Luis Otero";
-$session_data['user_id'] = 1;	
+$session_data['user_id'] = 2;
+*/
 
-if (!isset($_REQUEST['c']) && !isset($_REQUEST['m']))
+
+/*
+//A teacher
+$session_data['first'] = "Andy";
+$session_data['last'] = "Kwan";
+$session_data['user_role'] = 1;
+$session_data['major'] = "Software Engineering Fall 2012";
+$session_data['user_name'] = "Andy Kwan";
+$session_data['user_id'] = 3;
+*/
+
+if(isset($_POST['map_name']) && isset($_POST['map_major']))
+{
+	if(isset($_POST['c']) && isset($_POST['m']))
+	{
+		if($_POST['c'] == "FormController")
+		{
+			$class = 'moodle\\controllers\\'.$_POST['c'];
+			$class = new $class();
+			$method = $_POST['m'];
+			$class->$method($_POST['map_name'], $_POST['map_major']);
+		}
+	}
+}
+else if (isset($_POST['course_id']))
+{
+	if(isset($_POST['c']) && isset($_POST['m']))
+	{
+		if($_POST['c'] == "FormController")
+		{
+			$class = 'moodle\\controllers\\'.$_POST['c'];
+			$class = new $class();
+			$method = $_POST['m'];
+			$class->$method($_POST['course_id'], $_POST['map_id']);
+		}
+	}
+}
+else if (!isset($_REQUEST['c']) && !isset($_REQUEST['m']))
 {
 	if($session_data['user_role'] == 0)
 	{
@@ -63,6 +108,10 @@ else if (isset($_REQUEST['c']) && isset($_REQUEST['m']))
 		{
 			$session_data['major'] = $_REQUEST['arg1'];
 		}
+		if(isset($_REQUEST['arg2']) && !isset($_REQUEST['arg3']))
+		{
+			$session_data['map_id'] = $_REQUEST['arg2'];
+		}
 		if(isset($_REQUEST['arg2']) && isset($_REQUEST['arg3']))
 		{
 			$session_data['first'] = $_REQUEST['arg2'];
@@ -73,7 +122,20 @@ else if (isset($_REQUEST['c']) && isset($_REQUEST['m']))
 	}
 	else if ($class == "FormController")
 	{
-		
+		if(isset($_REQUEST['arg2']) && isset($_REQUEST['arg1']))
+		{
+			$class = 'moodle\\controllers\\'.$class;
+			$class = new $class();
+			$method = $_REQUEST['m'];
+			$class->$method($_REQUEST['arg1'], $_REQUEST['arg2']);
+		}
+		else if (isset($_REQUEST['arg1']))
+		{
+			$class = 'moodle\\controllers\\'.$class;
+			$class = new $class();
+			$method = $_REQUEST['m'];
+			$class->$method($_REQUEST['arg1']);
+		}
 	}
 }
 else
